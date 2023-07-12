@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    component: db
+
+spec:
+  containers:
+  - name: mysql-db
+    image: 544714521291.dkr.ecr.us-east-1.amazonaws.com/psamin2-ecr:dbv1.0
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: pw  # Replace with your desired MySQL root password
+    - name: MYSQL_DATABASE
+      value: employees
+    ports:
+        - containerPort: 3306
+          protocol: TCP

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql-rep
+  labels:
+    app: mysql
+    component: db
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      component: db
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: mysql
+        component: db
+    spec:
+      containers:
+      - name: mysql
+        image: 544714521291.dkr.ecr.us-east-1.amazonaws.com/psamin2-ecr:dbv1.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: pw  # Replace with your desired MySQL root password
+        - name: MYSQL_DATABASE
+          value: employees
+
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+       
